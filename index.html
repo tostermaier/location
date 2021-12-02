@@ -8,10 +8,7 @@
     <script src="https://unpkg.com/aframe-look-at-component@0.8.0/dist/aframe-look-at-component.min.js"></script>
 </head>
 <script>
-    AFRAME.registerComponent('peakfinder', {
-        init: function () {
-            this.loaded = false;
-            window.addEventListener('gps-camera-update-position', e => {
+       window.addEventListener('gps-camera-update-position', e => {
                 alert("hey")
                 if (this.loaded === false) {
                     this._loadPeaks(e.detail.position.longitude, e.detail.position.latitude);
@@ -19,8 +16,12 @@
                     console.log("location", e.detail.position.longitude, e.detail.position.latitude)
                 }
             });
+    /*AFRAME.registerComponent('peakfinder', {
+        init: function () {
+            this.loaded = false;
+         
         }
-    });
+    });*/
 
 </script>
 <body>
