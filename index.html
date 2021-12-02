@@ -9,7 +9,7 @@
 </head>
 <script>
        window.addEventListener('gps-camera-update-position', e => {
-                alert("hey")
+              //  alert("hey")
                 if (this.loaded === false) {
                     this._loadPeaks(e.detail.position.longitude, e.detail.position.latitude);
                     this.loaded = true;
