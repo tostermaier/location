@@ -25,7 +25,9 @@
 
 </script>
 <body>
-    <a-scene vr-mode-ui="enabled: false" arjs='sourceType: webcam; videoTexture: true; debugUIEnabled: true;'
+
+    <nav></nav>
+    <a-scene vr-mode-ui="enabled: false" arjs='sourceType: webcam; videoTexture: true; debugUIEnabled: false;'
         renderer='antialias: true; alpha: true'>
         <a-camera gps-projected-camera rotation-reader></a-camera>
         <!--<a-box gps-projected-entity-place='latitude: 52.4279336; longitude: 13.591294' material='color: red'
@@ -36,5 +38,58 @@
 
 
 </body>
+
+<script>
+
+window.onload = () => {
+     let places = staticLoadPlaces();
+     renderPlaces(places);
+};
+
+function staticLoadPlaces() {
+    return [
+        {
+            name: 'Fungus',
+            location: {
+                lat: 52.4279336,
+                lng: 13.591294,
+            }, 
+            resource: './assets/fungus/fungus_1_g.gltf'
+        },
+        {
+            name: 'Fungus2',
+            location: {
+                lat: 52.427820,
+                lng: 13.591385,
+            },
+            resource: './assets/fungus/fungus_2.gltf'
+        },
+    ];
+}
+
+function renderPlaces(places) {
+    let scene = document.querySelector('a-scene');
+
+    places.forEach((place) => {
+        let latitude = place.location.lat;
+        let longitude = place.location.lng;
+        let resource = place.resource;
+
+        let model = document.createElement('a-entity');
+        model.setAttribute('gps-entity-place', `latitude: ${latitude}; longitude: ${longitude};`);
+        model.setAttribute('gltf-model', resource);
+        model.setAttribute('rotation', '0 180 0');
+        model.setAttribute('animation-mixer', '');
+        model.setAttribute('scale', '0.5 0.5 0.5');
+
+        model.addEventListener('loaded', () => {
+            window.dispatchEvent(new CustomEvent('gps-entity-place-loaded'))
+        });
+
+        scene.appendChild(model);
+    });
+}
+
+</script>
 
 </html>
