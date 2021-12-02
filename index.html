@@ -28,8 +28,10 @@
     <a-scene vr-mode-ui="enabled: false" arjs='sourceType: webcam; videoTexture: true; debugUIEnabled: true;'
         renderer='antialias: true; alpha: true'>
         <a-camera gps-projected-camera rotation-reader></a-camera>
-        <a-box gps-projected-entity-place='latitude: 52.4279336; longitude: 13.591294' material='color: red'
-            scale='10 10 10'></a-box>
+        <!--<a-box gps-projected-entity-place='latitude: 52.4279336; longitude: 13.591294' material='color: red'
+            scale='10 10 10'></a-box>-->
+
+            <a-entity gltf-model="./assets/fungus/fungus_1_g.gltf" rotation="0 180 0" scale="0.15 0.15 0.15" gps-entity-place="latitude: 52.4279336; longitude: 13.591294;" animation-mixer/>
     </a-scene>
 
 
